@@ -8,7 +8,20 @@
     <input type="text" id="nip" placeholder="numer nip"><br>
     <input type="text" id="www" placeholder="strona www"><br>
     <input type="text" id="phone" placeholder="numer telefonu"><br>
-    <input type="button" onclick="" id="generate" value="generuj"><br>
+    <input type="button" onclick="myFunction()" id="generate" value="generuj" onclick=""><br>
+
+    <script> 
+    function myFunction(){
+        document.getElementById("firstname").value = "Adam";
+        document.getElementById("lastname").value = "Nowak";
+        document.getElementById("email").value = "229078@edu.p.lodz.pl";
+        document.getElementById("zip").value = "91-111";
+        document.getElementById("nip").value = "1234";
+        document.getElementById("www").value = "www.politechnikalodzka.pl";
+        document.getElementById("phone").value = "666111222";
+    }
+        
+    </script>
 </body>
 </html>
 
