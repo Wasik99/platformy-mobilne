@@ -17,13 +17,13 @@
         <input type="url" id="webpage" required>
         <br>
         <label for="winpath1">Ścieżka windows lowercase:</label>
-        <input type="text" id="winpath1" pattern="^([A-Z]:\\)(windows|winnt|win|dos|msdos)(\\[a-z]+)?$" required>
+        <input type="text" id="winpath1" pattern="^([A-Z]:\\)(windows|winnt|win|dos|msdos)(\\[a-z]+){0,}?$" required>
         <br>
         <label for="winpath2">Ścieżka windows allcase:</label>
         <input type="text" id="winpath2"  required>
         <br>
         <label for="linuxpath">Linux path:</label>
-        <input type="text" id="linuxpath" pattern="^\/etc\/[A-Za-z]+$" required>
+        <input type="text" id="linuxpath" pattern="^(\/etc)(\/[A-Za-z0-9]+){0,}?$" required>
         <br>
         <label for="phone">Numer telefonu:</label>
         <input type="tel" id="phone" pattern="\d{3}-\d{3}-\d{3}" required>
