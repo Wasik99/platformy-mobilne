@@ -28,16 +28,31 @@
         <label for="phone">Numer telefonu:</label>
         <input type="tel" id="phone" pattern="\d{3}-\d{3}-\d{3}" required>
         <br>
-        <button type="button" id="generate">Generuj</button>
+        <button type="button" id="generate" onclick="generateData()">Generuj</button>
 
         <script>
             var ipv4 = document.getElementById("ipv4");
+            var email = document.getElementById("email");
             var webpage = document.getElementById("webpage");
             var winpath1 = document.getElementById("winpath1");
             var winpath2 = document.getElementById("winpath2");
             var linuxpath = document.getElementById("linuxpath");
             var phone = document.getElementById("phone");
 
+            var data = [
+        ["192.168.1.1", "jan.kowalski@email.com", "www.kowal.pl", "C:\windows\temp", "C:\windows\temp", "/etc/passwd", "123-123-123"],
+        ["192.168.2.1", "beata.zab@email.com", "www.zab.pl", "C:\windows\aaa", "C:\windows\bbbb", "/etc/passsss", "222-222-222"]
+      ];
+      
+        function generateData() {
+        var randomIndex = Math.floor(Math.random() * data.length);
+        ipv4.value = data[randomIndex][0];
+        email.value = data[randomIndex][1];
+        webpage.value = "https://" + data[randomIndex][2];
+        winpath1.value = data[randomIndex][3];
+        winpath2.value = data[randomIndex][4];
+        linuxpath.value = data[randomIndex][5];
+        phone.value = data[randomIndex][6];
         </script>
     </body>
 
