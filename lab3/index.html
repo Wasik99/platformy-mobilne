@@ -45,10 +45,10 @@
         <input type="url" id="webpage" required>
         <br>
         <label for="winpath1">Ścieżka windows lowercase:</label>
-        <input type="text" id="winpath1" pattern="^([A-Z]:\\)(windows|winnt|win|dos|msdos)(\\[a-z]+){0,}?$" required>
+        <input type="text" id="winpath1" pattern="^([a-z]:\\)(windows|winnt|win|dos|msdos)(\\[a-z0-9]+){0,}?$" required>
         <br>
         <label for="winpath2">Ścieżka windows allcase:</label>
-        <input type="text" id="winpath2"  required>
+        <input type="text" id="winpath2" pattern="^([a-zA-Z]:\\)(windows|winnt|win|dos|msdos)(\\[a-zA-Z0-9]+){0,}?$" required>
         <br>
         <label for="linuxpath">Linux path:</label>
         <input type="text" id="linuxpath" pattern="^(\/etc)(\/[A-Za-z0-9]+){0,}?$" required>
