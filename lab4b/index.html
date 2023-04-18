@@ -140,6 +140,29 @@
             request.onsuccess = function(event) {
                 db = event.target.result;
             };
+            function addToDB(){
+                const table = document.getElementById("clients_data_table");
+                for (let i = 1; i < table.rows.length; i++) {
+                    
+                    let transaction = db.transaction(['clients'], 'readwrite');
+                    let objectStore = transaction.objectStore('clients');
+
+
+                    let client = {
+                    firstname: table.rows[i].cells[0].innerText,
+                    lastname: table.rows[i].cells[1].innerText,
+                    email: table.rows[i].cells[2].innerText,
+                    zip: table.rows[i].cells[3].innerText,
+                    nip: table.rows[i].cells[4].innerText,
+                    phone: table.rows[i].cells[5].innerText,
+                    };
+                    let request = objectStore.add(client);
+                    request.onsuccess = function(event) {
+                        console.log('Dane zostały dodane do bazy danych.');
+                    };
+                }
+            
+            };
         </script>
     </body>
 
