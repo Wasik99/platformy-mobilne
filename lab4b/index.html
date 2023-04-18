@@ -57,7 +57,6 @@
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
         <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
-        <button type="button" id="clear_data" onclick="clearData()">Wyczysc baze</button>
 
         <table id="clients_data_table">
           <tr>
@@ -147,11 +146,16 @@
 
             function addToDB(){
                 const table = document.getElementById("clients_data_table");
-                
+                let transaction = db.transaction(['clients'], 'readwrite');
+                let objectStore = transaction.objectStore('clients');
+                let objectStoreRequest = objectStore.clear();
+
+
                 for (let i = 1; i < table.rows.length; i++) {
                     
                     let transaction = db.transaction(['clients'], 'readwrite');
                     let objectStore = transaction.objectStore('clients');
+                    
 
 
                     let client = {
@@ -196,10 +200,6 @@
                     });
                 };
                 }
-
-            // function clearData()  {
-            //   let myRequest = indexedDB.deleteDatabase("myDatabase");
-            // }
         </script>
     </body>
 
