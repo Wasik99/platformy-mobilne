@@ -55,6 +55,8 @@
         <br>
         <button type="button" id="generate" onclick="generateData()">Generuj</button>
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
+        <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
+        <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
 
         <table id="clients_data_table">
           <tr>
@@ -68,6 +70,7 @@
         </table>
 
         <script>
+            
             var firstname = document.getElementById("firstname");
             var lastname = document.getElementById("lastname");
             var email = document.getElementById("email");
@@ -140,6 +143,7 @@
             request.onsuccess = function(event) {
                 db = event.target.result;
             };
+
             function addToDB(){
                 const table = document.getElementById("clients_data_table");
                 for (let i = 1; i < table.rows.length; i++) {
@@ -163,6 +167,33 @@
                 }
             
             };
+
+            function loadFromDB() {
+                const objectStore = db.transaction('clients').objectStore('clients');
+                const request = objectStore.getAll();
+
+                request.onsuccess = function(event) {
+                    const data = event.target.result;
+                    const tableBody = document.getElementById('clients_data_table');
+                    tableBody.innerHTML = '<tr><th>Imię</th><th>Nazwisko</th><th>Email</th><th>Kod-pocztowy</th><th>Numer NIP</th><th>Numer telefonu</th></tr>';
+                    data.forEach(function(item) {
+                    const row = tableBody.insertRow();
+                    const firstNameCell = row.insertCell();
+                    firstNameCell.innerText = item.firstname;
+                    const lastNameCell = row.insertCell();
+                    lastNameCell.innerText = item.lastname;
+                    const emailCell = row.insertCell();
+                    emailCell.innerText = item.email;
+                    const zipCell = row.insertCell();
+                    zipCell.innerText = item.zip;
+                    const nipCell = row.insertCell();
+                    nipCell.innerText = item.nip;
+                    const phoneCell = row.insertCell();
+                    phoneCell.innerText = item.phone;
+                    
+                    });
+                };
+                }
         </script>
     </body>
 
