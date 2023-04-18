@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Przykład IndexedDB</title>
+</head>
+<body>
+  <label>First name: <input type="text" id="firstName"></label>
+  <label>Last name: <input type="text" id="lastName"></label>
+  <label>Age: <input type="number" id="age"></label>
+  <button id="addButton">Add to database</button>
+  <button id="showButton">Show data from database</button>
+
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    
+  </table>
+
+  <script>
+    let db;
+const request = indexedDB.open('myDatabase', 1);
+
+request.onupgradeneeded = function(event) {
+  db = event.target.result;
+  const objectStore = db.createObjectStore('myObjectStore', { keyPath: 'id', autoIncrement:true });
+  objectStore.createIndex('firstName', 'firstName', { unique: false });
+  objectStore.createIndex('lastName', 'lastName', { unique: false });
+  objectStore.createIndex('age', 'age', { unique: false });
+};
+
+request.onsuccess = function(event) {
+  db = event.target.result;
+};
+
+function addToDB() {
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const age = document.getElementById('age').value;
+
+  const transaction = db.transaction(['myObjectStore'], 'readwrite');
+  const objectStore = transaction.objectStore('myObjectStore');
+  const request = objectStore.add({ firstName: firstName, lastName: lastName, age: age });
+  request.onsuccess = function(event) {
+    console.log('Data has been added to the database.');
+  };
+}
+
+function showDataFromDB() {
+    let transaction = db.transaction(['myObjectStore'], 'readonly');
+      let objectStore = transaction.objectStore('myObjectStore');
+      let request = objectStore.openCursor();
+
+      let tableBody = document.querySelector('#myTable');
+      tableBody.innerHTML = '<tr><th>Imię</th><th>Nazwisko</th><th>Wiek</th></tr>';
+
+      request.onsuccess = function(event) {
+        let cursor = event.target.result;
+
+        if (cursor) {
+          let row = document.createElement('tr');
+          let nameCell = document.createElement('td');
+          let lastnameCell = document.createElement('td');
+          let ageCell = document.createElement('td');
+
+          nameCell.textContent = cursor.value.firstName;
+          lastnameCell.textContent = cursor.value.lastName;
+          ageCell.textContent = cursor.value.age;
+
+          row.appendChild(nameCell);
+          row.appendChild(lastnameCell);
+          row.appendChild(ageCell);
+
+          tableBody.appendChild(row);
+
+          cursor.continue();
+        } else {
+          console.log('Nie ma więcej danych w bazie.');
+        }
+      };
+    }
+
+    document.getElementById('addButton').addEventListener('click', addToDB);
+    document.getElementById('showButton').addEventListener('click', showDataFromDB);
+
+  </script>
+</body>
+</html>
