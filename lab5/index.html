@@ -125,7 +125,7 @@
           cell4.innerHTML = zip.value;
           cell5.innerHTML = nip.value;
           cell6.innerHTML = phone.value;
-          cell7.innerHTML = "<button class='delete-row' onclick='remove()'>Delete</button>";
+          cell7.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button>";
         }
 
         let db;
@@ -198,10 +198,15 @@
                     nipCell.innerText = item.nip;
                     const phoneCell = row.insertCell();
                     phoneCell.innerText = item.phone;
-                    const deleteCell = row.inserCell();
-                    deleteCell.innerHTML = "<button class='delete_row' onclick='remove()'>Delete</button>";
+                    const buttonDelete = row.insertCell();
+                    buttonDelete.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button>";
                     });
                 };
+                }
+
+                function remove(btn) {
+                    var row = btn.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
                 }
         </script>
     </body>
