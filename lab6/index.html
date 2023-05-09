@@ -208,6 +208,16 @@
                     var row = btn.parentNode.parentNode;
                     row.parentNode.removeChild(row);
                 }
+                function moveUp(button) {
+                        const row = button.parentNode.parentNode;
+                        const table = row.parentNode;
+                        const rowIndex = row.rowIndex;
+
+                        if (rowIndex === 1) return; 
+
+                        table.deleteRow(rowIndex); 
+                        table.insertBefore(row, table.rows[rowIndex - 1]); 
+                }
         </script>
     </body>
 
