@@ -125,7 +125,7 @@
           cell4.innerHTML = zip.value;
           cell5.innerHTML = nip.value;
           cell6.innerHTML = phone.value;
-          cell7.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp'>Up</button><button class='move_down' onclick='moveDown'>Down</button>";
+          cell7.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button>";
         }
 
         let db;
@@ -222,6 +222,17 @@
 
                         table.deleteRow(rowIndex); 
                         table.insertBefore(row, table.rows[rowIndex - 1]); 
+                }
+            
+                function moveDown(button) {
+                    const row = button.parentNode.parentNode;
+                    const table = row.parentNode;
+                    const rowIndex = row.rowIndex;
+                    
+                    
+
+                    table.deleteRow(rowIndex); 
+                    table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
         </script>
     </body>
