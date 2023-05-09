@@ -213,7 +213,12 @@
                         const table = row.parentNode;
                         const rowIndex = row.rowIndex;
 
-                        if (rowIndex === 1) return; 
+                        if (rowIndex === 1){
+                            const lastRowIndex = table.rows.length - 1;
+                            table.deleteRow(rowIndex); 
+                            table.insertRow(lastRowIndex).innerHTML = row.innerHTML; 
+                            return;
+                        }; 
 
                         table.deleteRow(rowIndex); 
                         table.insertBefore(row, table.rows[rowIndex - 1]); 
