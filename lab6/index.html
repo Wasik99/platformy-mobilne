@@ -198,8 +198,9 @@
                     nipCell.innerText = item.nip;
                     const phoneCell = row.insertCell();
                     phoneCell.innerText = item.phone;
-                    const buttonDelete = row.insertCell();
-                    buttonDelete.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button>";
+                    const buttons = row.insertCell();
+                    buttons.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button>";
+                    
                     });
                 };
                 }
