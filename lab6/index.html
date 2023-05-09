@@ -229,8 +229,13 @@
                     const table = row.parentNode;
                     const rowIndex = row.rowIndex;
                     
+                    if (rowIndex === table.rows.length - 1){
+                        const firstRowIndex = 1;
+                        table.deleteRow(rowIndex); 
+                        table.insertRow(firstRowIndex).innerHTML = row.innerHTML; 
+                        return;
+                    }; 
                     
-
                     table.deleteRow(rowIndex); 
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
