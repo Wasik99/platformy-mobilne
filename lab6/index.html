@@ -66,6 +66,7 @@
             <th>Kod-pocztowy</th>
             <th>Numer NIP</th>
             <th>Numer telefonu</th>
+            <th>Actions</th>
           </tr>
         </table>
 
@@ -183,7 +184,7 @@
                 request.onsuccess = function(event) {
                     const data = event.target.result;
                     const tableBody = document.getElementById('clients_data_table');
-                    tableBody.innerHTML = '<tr><th>Imię</th><th>Nazwisko</th><th>Email</th><th>Kod-pocztowy</th><th>Numer NIP</th><th>Numer telefonu</th></tr>';
+                    tableBody.innerHTML = '<tr><th>Imię</th><th>Nazwisko</th><th>Email</th><th>Kod-pocztowy</th><th>Numer NIP</th><th>Numer telefonu</th><th>Actions</th></tr>';
                     data.forEach(function(item) {
                     const row = tableBody.insertRow();
                     const firstNameCell = row.insertCell();
@@ -200,7 +201,6 @@
                     phoneCell.innerText = item.phone;
                     const buttons = row.insertCell();
                     buttons.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button>";
-                    
                     });
                 };
                 }
@@ -209,22 +209,23 @@
                     var row = btn.parentNode.parentNode;
                     row.parentNode.removeChild(row);
                 }
+                
                 function moveUp(button) {
-                        const row = button.parentNode.parentNode;
-                        const table = row.parentNode;
-                        const rowIndex = row.rowIndex;
-
-                        if (rowIndex === 1){
-                            const lastRowIndex = table.rows.length - 1;
-                            table.deleteRow(rowIndex); 
-                            table.insertRow(lastRowIndex).innerHTML = row.innerHTML; 
-                            return;
-                        }; 
-
+                    const row = button.parentNode.parentNode;
+                    const table = row.parentNode;
+                    const rowIndex = row.rowIndex;
+                    
+                    if (rowIndex === 1){
+                        const lastRowIndex = table.rows.length - 1;
                         table.deleteRow(rowIndex); 
-                        table.insertBefore(row, table.rows[rowIndex - 1]); 
+                        table.insertRow(lastRowIndex).innerHTML = row.innerHTML; 
+                        return;
+                    }; 
+
+                    table.deleteRow(rowIndex); 
+                    table.insertBefore(row, table.rows[rowIndex - 1]); 
                 }
-            
+
                 function moveDown(button) {
                     const row = button.parentNode.parentNode;
                     const table = row.parentNode;
@@ -236,7 +237,7 @@
                         table.insertRow(firstRowIndex).innerHTML = row.innerHTML; 
                         return;
                     }; 
-                    
+
                     table.deleteRow(rowIndex); 
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
