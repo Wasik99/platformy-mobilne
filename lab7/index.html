@@ -245,31 +245,19 @@
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
 
-                // function editRow(button) {
-                //     var cells = row.getElementsByTagName('td');
-                //     const rowIndex = row.rowIndex;
-                //     firstname.value = data[rowIndex][0];
-                //     lastname.value = data[rowIndex][1];
-                //     email.value = data[rowIndex][2];
-                //     zip.value = data[rowIndex][3];
-                //     nip.value = data[rowIndex][4];
-                //     webpage.value = "https://" + data[rowIndex][5];
-                //     phone.value = data[rowIndex][6];
-                //     ipv4.value = data[rowIndex][7];
-                //     winpath1.value = data[rowIndex][8];
-                //     winpath2.value = data[rowIndex][9];
-                //     linuxpath.value = data[rowIndex][10];
-
-                //     // form.elements['name'].value = cells[0].innerText;
-                //     // form.elements['age'].value = cells[1].innerText;
-                //     // form.elements['email'].value = cells[2].innerText;
-
-                //     var acceptButton = document.getElementById('accept');
-                //     acceptButton.disabled = false;
-                // }
-                 function editRow(button){
+            
+                function editRow(button) {
                     document.getElementById('accept').disabled = false;
-                 }
+                    var row = button.parentNode.parentNode;
+                    var cells = row.getElementsByTagName("td");
+
+                    document.getElementById("firstname").value = cells[0].innerText;
+                    document.getElementById("lastname").value = cells[1].innerText;
+                    document.getElementById("email").value = cells[2].innerText;
+                    document.getElementById("zip").value = cells[3].innerText;
+                    document.getElementById("nip").value = cells[4].innerText;
+                    document.getElementById("phone").value = cells[5].innerText;
+                    }
 
                 
         </script>
