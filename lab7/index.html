@@ -57,7 +57,7 @@
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
         <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
-        <button type="button" id="accept" onclick="editRow()" disabled>Akceptuj</button>
+        <button type="button" id="accept" onclick="acceptChanges()" disabled>Akceptuj</button>
 
         <table id="clients_data_table">
           <tr>
@@ -127,7 +127,7 @@
           cell4.innerHTML = zip.value;
           cell5.innerHTML = nip.value;
           cell6.innerHTML = phone.value;
-          cell7.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button><button class='edit_row' onclick='edit(this)'>Edytuj</button>";
+          cell7.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button><button class='edit_row' onclick='editRow(this)'>Edytuj</button>";
         }
 
         let db;
@@ -245,11 +245,22 @@
 
                 function editRow(row) {
                     var cells = row.getElementsByTagName('td');
-                    var form = document.getElementById('edit_form');
+                    const rowIndex = row.rowIndex;
+                    firstname.value = data[rowIndex][0];
+                    lastname.value = data[rowIndex][1];
+                    email.value = data[rowIndex][2];
+                    zip.value = data[rowIndex][3];
+                    nip.value = data[rowIndex][4];
+                    webpage.value = "https://" + data[rowIndex][5];
+                    phone.value = data[rowIndex][6];
+                    ipv4.value = data[rowIndex][7];
+                    winpath1.value = data[rowIndex][8];
+                    winpath2.value = data[rowIndex][9];
+                    linuxpath.value = data[rowIndex][10];
 
-                    form.elements['name'].value = cells[0].innerText;
-                    form.elements['age'].value = cells[1].innerText;
-                    form.elements['email'].value = cells[2].innerText;
+                    // form.elements['name'].value = cells[0].innerText;
+                    // form.elements['age'].value = cells[1].innerText;
+                    // form.elements['email'].value = cells[2].innerText;
 
                     var acceptButton = document.getElementById('accept');
                     acceptButton.disabled = false;
