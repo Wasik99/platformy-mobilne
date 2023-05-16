@@ -19,7 +19,7 @@
       }
     </style>
     </head>
-    <body>
+    <body onload="disabled()">
         <label for="firstname">Imię:</label>
         <input type="text" id="firstname" pattern="[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+" required>
         <br>
@@ -57,7 +57,7 @@
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
         <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
-        <button type="button" id="accept" onclick="acceptChanges()" disabled>Akceptuj</button>
+        <button type="button" id="accept" onclick="acceptChanges();">Akceptuj</button>
 
         <table id="clients_data_table">
           <tr>
@@ -72,7 +72,9 @@
         </table>
 
         <script>
-            
+            function disabled(){
+                document.getElementById('accept').disabled = true;
+            }
             var firstname = document.getElementById("firstname");
             var lastname = document.getElementById("lastname");
             var email = document.getElementById("email");
@@ -243,28 +245,33 @@
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
 
-                function editRow(row) {
-                    var cells = row.getElementsByTagName('td');
-                    const rowIndex = row.rowIndex;
-                    firstname.value = data[rowIndex][0];
-                    lastname.value = data[rowIndex][1];
-                    email.value = data[rowIndex][2];
-                    zip.value = data[rowIndex][3];
-                    nip.value = data[rowIndex][4];
-                    webpage.value = "https://" + data[rowIndex][5];
-                    phone.value = data[rowIndex][6];
-                    ipv4.value = data[rowIndex][7];
-                    winpath1.value = data[rowIndex][8];
-                    winpath2.value = data[rowIndex][9];
-                    linuxpath.value = data[rowIndex][10];
+                // function editRow(button) {
+                //     var cells = row.getElementsByTagName('td');
+                //     const rowIndex = row.rowIndex;
+                //     firstname.value = data[rowIndex][0];
+                //     lastname.value = data[rowIndex][1];
+                //     email.value = data[rowIndex][2];
+                //     zip.value = data[rowIndex][3];
+                //     nip.value = data[rowIndex][4];
+                //     webpage.value = "https://" + data[rowIndex][5];
+                //     phone.value = data[rowIndex][6];
+                //     ipv4.value = data[rowIndex][7];
+                //     winpath1.value = data[rowIndex][8];
+                //     winpath2.value = data[rowIndex][9];
+                //     linuxpath.value = data[rowIndex][10];
 
-                    // form.elements['name'].value = cells[0].innerText;
-                    // form.elements['age'].value = cells[1].innerText;
-                    // form.elements['email'].value = cells[2].innerText;
+                //     // form.elements['name'].value = cells[0].innerText;
+                //     // form.elements['age'].value = cells[1].innerText;
+                //     // form.elements['email'].value = cells[2].innerText;
 
-                    var acceptButton = document.getElementById('accept');
-                    acceptButton.disabled = false;
-                }
+                //     var acceptButton = document.getElementById('accept');
+                //     acceptButton.disabled = false;
+                // }
+                 function editRow(button){
+                    document.getElementById('accept').disabled = false;
+                 }
+
+                
         </script>
     </body>
 
