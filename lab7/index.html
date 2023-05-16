@@ -206,7 +206,7 @@
                     const phoneCell = row.insertCell();
                     phoneCell.innerText = item.phone;
                     const buttons = row.insertCell();
-                    buttons.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button>";
+                    buttons.innerHTML = "<button class='delete_row' onclick='remove(this)'>Delete</button><button class='move_up' onclick='moveUp(this)'>Up</button><button class='move_down' onclick='moveDown(this)'>Down</button><button class='edit_row' onclick='editRow(this)'>Edytuj</button>";
                     });
                 };
                 }
