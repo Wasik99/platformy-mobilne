@@ -72,6 +72,8 @@
         </table>
 
         <script>
+            var currentRow = null;
+
             function disabled(){
                 document.getElementById('accept').disabled = true;
             }
@@ -246,12 +248,11 @@
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
                 }
 
-            var globalRow;
+            
                 function editRow(button) {
                     document.getElementById('accept').disabled = false;
-                    var row = button.parentNode.parentNode;
-                    var cells = row.getElementsByTagName("td");
-                    globalRow = row;
+                    currentRow = button.parentNode.parentNode;
+                    var cells = currentRow.getElementsByTagName("td");
 
                     document.getElementById("firstname").value = cells[0].innerText;
                     document.getElementById("lastname").value = cells[1].innerText;
@@ -262,14 +263,16 @@
                     }
 
                 function acceptChanges(){
-                    var row = document.getElementById("clients_data_table").rows[globalRow]; // przykładowy wiersz do zapisu (indeks 1)
-
-                    row.cells[0].innerText = document.getElementById("firstname").value;
-                    row.cells[1].innerText = document.getElementById("lastname").value;
-                    row.cells[2].innerText = document.getElementById("email").value;
-                    row.cells[3].innerText = document.getElementById("zip").value;
-                    row.cells[4].innerText = document.getElementById("nip").value;
-                    row.cells[5].innerText = document.getElementById("phone").value;
+                    disabled();
+                    if (currentRow) {
+                        currentRow.cells[0].innerText = document.getElementById("firstname").value;
+                        currentRow.cells[1].innerText = document.getElementById("lastname").value;
+                        currentRow.cells[2].innerText = document.getElementById("email").value;
+                        currentRow.cells[3].innerText = document.getElementById("zip").value;
+                        currentRow.cells[4].innerText = document.getElementById("nip").value;
+                        currentRow.cells[5].innerText = document.getElementById("phone").value;
+                        currentRow = null; // Zresetowanie zmiennej po zapisie danych
+                    }
                 }
                 
         </script>
