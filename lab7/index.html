@@ -57,6 +57,7 @@
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
         <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
+        <button type="button" id="accept" onclick="editRow()" disabled>Akceptuj</button>
 
         <table id="clients_data_table">
           <tr>
@@ -240,6 +241,18 @@
 
                     table.deleteRow(rowIndex); 
                     table.insertBefore(row, table.rows[rowIndex + 1]); 
+                }
+
+                function editRow(row) {
+                    var cells = row.getElementsByTagName('td');
+                    var form = document.getElementById('edit_form');
+
+                    form.elements['name'].value = cells[0].innerText;
+                    form.elements['age'].value = cells[1].innerText;
+                    form.elements['email'].value = cells[2].innerText;
+
+                    var acceptButton = document.getElementById('accept');
+                    acceptButton.disabled = false;
                 }
         </script>
     </body>
