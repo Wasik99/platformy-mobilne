@@ -278,6 +278,7 @@
                         currentRow = null; // Zresetowanie zmiennej po zapisie danych
                     }
                 }
+                //funkcja filtrująca
                 function filterTable() {
                     var input = document.getElementById("search").value.toLowerCase();
                     var table = document.getElementById("clients_data_table");
@@ -296,7 +297,6 @@
                             break;
                         }
                         }
-
                         if (displayRow) {
                         row.style.display = "";
                         } else {
