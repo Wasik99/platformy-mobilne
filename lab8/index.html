@@ -57,8 +57,10 @@
         <button type="button" id="add_data" onclick="addData()">Dodaj</button>
         <button type="button" id="save_data" onclick="addToDB()">Zapisz</button>
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
-        <button type="button" id="accept" onclick="acceptChanges();">Akceptuj</button>
+        <button type="button" id="accept" onclick="acceptChanges();">Akceptuj</button><br><br>
 
+        <input type="text" id="search" placeholder="Wyszukaj" oninput="filterTable()">
+        <br><br>
         <table id="clients_data_table">
           <tr>
             <th>Imię</th>
