@@ -59,8 +59,10 @@
         <button type="button" id="load_data" onclick="loadFromDB()">Wczytaj</button>
         <button type="button" id="accept" onclick="acceptChanges();">Akceptuj</button>
 
+        <br><br>
         <input type="text" id="search" placeholder="Wyszukaj" oninput="filterTable()">
         <br><br>
+
         <table id="clients_data_table">
           <tr>
             <th>Imię</th>
@@ -276,12 +278,32 @@
                         currentRow = null; // Zresetowanie zmiennej po zapisie danych
                     }
                 }
-                filterTable(){
+                function filterTable() {
                     var input = document.getElementById("search").value.toLowerCase();
-                    var table = document.getElementById("table");
+                    var table = document.getElementById("clients_data_table");
                     var rows = table.getElementsByTagName("tr");
 
-                }
+                    for (var i = 1; i < rows.length; i++) {
+                        var row = rows[i];
+                        var cells = row.getElementsByTagName("td");
+                        var displayRow = false;
+
+                        for (var j = 0; j < cells.length; j++) {
+                        var cell = cells[j];
+
+                        if (cell.innerHTML.toLowerCase().indexOf(input) > -1) {
+                            displayRow = true;
+                            break;
+                        }
+                        }
+
+                        if (displayRow) {
+                        row.style.display = "";
+                        } else {
+                        row.style.display = "none";
+                        }
+                    }
+                    }
                 
         </script>
     </body>
