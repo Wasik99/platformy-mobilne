@@ -278,9 +278,9 @@
                         currentRow = null; // Zresetowanie zmiennej po zapisie danych
                     }
                 }
+                // funkcja filtrująca
                 function filterTable() {
-                    var input = document.getElementById("search").value.toLowerCase().replace(/\s/g, "");
-                    var searchPhrases = input.split(" ");
+                    var input = document.getElementById("search").value.toLowerCase();
                     var table = document.getElementById("clients_data_table");
                     var rows = table.getElementsByTagName("tr");
 
@@ -291,20 +291,21 @@
 
                         for (var j = 0; j < cells.length; j++) {
                         var cell = cells[j];
-                        var cellText = cell.innerHTML.toLowerCase().replace(/\s/g, "");
+                        var cellText = cell.innerHTML.toLowerCase();
 
-                        var foundAllPhrases = true;
+                        // Rozdziel frazy oddzielone spacją
+                        var searchTerms = input.split(" ");
 
-                        for (var k = 0; k < searchPhrases.length; k++) {
-                            var searchPhrase = searchPhrases[k];
-
-                            if (cellText.indexOf(searchPhrase) === -1) {
-                            foundAllPhrases = false;
+                        // Sprawdź, czy każda fraza występuje w komórce
+                        var match = true;
+                        for (var k = 0; k < searchTerms.length; k++) {
+                            if (cellText.indexOf(searchTerms[k]) === -1) {
+                            match = false;
                             break;
                             }
                         }
 
-                        if (foundAllPhrases) {
+                        if (match) {
                             displayRow = true;
                             break;
                         }
