@@ -280,6 +280,7 @@
                 }
                 function filterTable() {
                     var input = document.getElementById("search").value.toLowerCase().replace(/\s/g, "");
+                    var searchPhrases = input.split(" ");
                     var table = document.getElementById("clients_data_table");
                     var rows = table.getElementsByTagName("tr");
 
@@ -287,15 +288,26 @@
                         var row = rows[i];
                         var cells = row.getElementsByTagName("td");
                         var displayRow = false;
-                        var searchText = "";
 
                         for (var j = 0; j < cells.length; j++) {
                         var cell = cells[j];
-                        searchText += cell.innerHTML.toLowerCase().replace(/\s/g, "");
+                        var cellText = cell.innerHTML.toLowerCase().replace(/\s/g, "");
+
+                        var foundAllPhrases = true;
+
+                        for (var k = 0; k < searchPhrases.length; k++) {
+                            var searchPhrase = searchPhrases[k];
+
+                            if (cellText.indexOf(searchPhrase) === -1) {
+                            foundAllPhrases = false;
+                            break;
+                            }
                         }
 
-                        if (searchText.indexOf(input) > -1) {
-                        displayRow = true;
+                        if (foundAllPhrases) {
+                            displayRow = true;
+                            break;
+                        }
                         }
 
                         if (displayRow) {
@@ -305,6 +317,7 @@
                         }
                     }
                     }
+
 
 
                 
