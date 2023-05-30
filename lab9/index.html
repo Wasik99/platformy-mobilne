@@ -279,44 +279,42 @@
                     }
                 }
                 // funkcja filtrująca
-                function filterTable() {
-                    var input = document.getElementById("search").value.toLowerCase();
+                function filterTable() { 
+                    var myFlag;
+                    var input = document.getElementById("search");
                     var table = document.getElementById("clients_data_table");
+                    const myArr = input.value.split(" ");
                     var rows = table.getElementsByTagName("tr");
 
                     for (var i = 1; i < rows.length; i++) {
-                        var row = rows[i];
-                        var cells = row.getElementsByTagName("td");
-                        var displayRow = false;
-
-                        for (var j = 0; j < cells.length; j++) {
-                        var cell = cells[j];
-                        var cellText = cell.innerHTML.toLowerCase();
-
-                        // Rozdziel frazy oddzielone spacją
-                        var searchTerms = input.split(" ");
-
-                        // Sprawdź, czy każda fraza występuje w komórce
-                        var match = true;
-                        for (var k = 0; k < searchTerms.length; k++) {
-                            if (cellText.indexOf(searchTerms[k]) === -1) {
-                            match = false;
-                            break;
+                        var myValue = true;
+                        for (g = 0; g < myArr.length; g++) { 
+                            myFlag = false
+                            var filter = myArr[g].toUpperCase();
+                        
+                            for (j = 0; j < 6; j++) {
+                                var td = rows[i].getElementsByTagName("td")[j];
+                                if (td) {
+                                    var myText = td.textContent || td.innerText;
+                                    if (myText.toUpperCase().indexOf(filter) > -1) {
+                                        myFlag = true;
+                                    }
+                                }
+                            }
+                            if (myFlag == false) {
+                                myValue = false;
                             }
                         }
 
-                        if (match) {
-                            displayRow = true;
-                            break;
-                        }
-                        }
 
-                        if (displayRow) {
-                        row.style.display = "";
-                        } else {
-                        row.style.display = "none";
+                        if (myValue == true) {
+                            rows[i].style.display = "";
+                        } 
+                        else {
+                            rows[i].style.display = "none";
                         }
                     }
+
                     }
 
 
