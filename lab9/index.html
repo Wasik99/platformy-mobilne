@@ -278,9 +278,8 @@
                         currentRow = null; // Zresetowanie zmiennej po zapisie danych
                     }
                 }
-                //funkcja filtrująca
                 function filterTable() {
-                    var input = document.getElementById("search").value.toLowerCase();
+                    var input = document.getElementById("search").value.toLowerCase().replace(/\s/g, "");
                     var table = document.getElementById("clients_data_table");
                     var rows = table.getElementsByTagName("tr");
 
@@ -288,15 +287,17 @@
                         var row = rows[i];
                         var cells = row.getElementsByTagName("td");
                         var displayRow = false;
+                        var searchText = "";
 
                         for (var j = 0; j < cells.length; j++) {
                         var cell = cells[j];
+                        searchText += cell.innerHTML.toLowerCase().replace(/\s/g, "");
+                        }
 
-                        if (cell.innerHTML.toLowerCase().indexOf(input) > -1) {
-                            displayRow = true;
-                            break;
+                        if (searchText.indexOf(input) > -1) {
+                        displayRow = true;
                         }
-                        }
+
                         if (displayRow) {
                         row.style.display = "";
                         } else {
@@ -304,6 +305,8 @@
                         }
                     }
                     }
+
+
                 
         </script>
     </body>
