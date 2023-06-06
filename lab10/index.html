@@ -63,6 +63,12 @@
         <input type="text" id="search" placeholder="Wyszukaj" oninput="filterTable()">
         <br><br>
 
+        <select name="fruits" id="fruitsList">
+            <option value="pomarancz">Pomarancza</option>
+        </select>
+        <br>
+        <input type="text" id="fruitName">
+        <button type="button" id="addFruit" onclick="addFruits();">Dodaj owoc</button>
         <table id="clients_data_table">
           <tr>
             <th>Imię</th>
