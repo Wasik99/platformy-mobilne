@@ -340,6 +340,11 @@
                             fruitInput.value = "";
                         }
                     }
+                    function removeFruits(){
+                        var selectElement = document.getElementById("fruitsList");
+                        var selectedIndex = selectElement.selectedIndex;
+                        selectElement.remove(selectedIndex);
+                    }
 
 
 
